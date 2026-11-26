@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#20382d">
+  <title>Snake Meadow</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="scene.js"></script>
+  <script defer src="game.js"></script>
+</head>
+<body>
+  <svg class="icon-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="title-cream" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#fff9dc"/>
+        <stop offset="15%" stop-color="#fff9dc"/>
+        <stop offset="15%" stop-color="#f9edc5"/>
+        <stop offset="72%" stop-color="#f9edc5"/>
+        <stop offset="72%" stop-color="#f3dda3"/>
+        <stop offset="100%" stop-color="#f3dda3"/>
+      </linearGradient>
+      <path id="title-snake" d="
+          M1 0h4v1h-4zM0 1h1v1h-1zM0 2h1v1h-1zM1 3h3v1h-3zM4 4h1v1h-1zM4 5h1v1h-1zM0 6h4v1h-4z
+          M6 0h1v1h-1zM10 0h1v1h-1zM6 1h2v1h-2zM10 1h1v1h-1zM6 2h2v1h-2zM10 2h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM6 4h1v1h-1zM9 4h2v1h-2zM6 5h1v1h-1zM9 5h2v1h-2zM6 6h1v1h-1zM10 6h1v1h-1z
+          M13 0h3v1h-3zM12 1h1v1h-1zM16 1h1v1h-1zM12 2h1v1h-1zM16 2h1v1h-1zM12 3h5v1h-5zM12 4h1v1h-1zM16 4h1v1h-1zM12 5h1v1h-1zM16 5h1v1h-1zM12 6h1v1h-1zM16 6h1v1h-1z
+          M18 0h1v1h-1zM22 0h1v1h-1zM18 1h1v1h-1zM21 1h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM18 3h2v1h-2zM18 4h1v1h-1zM20 4h1v1h-1zM18 5h1v1h-1zM21 5h1v1h-1zM18 6h1v1h-1zM22 6h1v1h-1z
+          M24 0h5v1h-5zM24 1h1v1h-1zM24 2h1v1h-1zM24 3h4v1h-4zM24 4h1v1h-1zM24 5h1v1h-1zM24 6h5v1h-5z
+      "/>
+      <path id="title-meadow" d="
+          M34 0h1v1h-1zM38 0h1v1h-1zM34 1h2v1h-2zM37 1h2v1h-2zM34 2h1v1h-1zM36 2h1v1h-1zM38 2h1v1h-1zM34 3h1v1h-1zM36 3h1v1h-1zM38 3h1v1h-1zM34 4h1v1h-1zM38 4h1v1h-1zM34 5h1v1h-1zM38 5h1v1h-1zM34 6h1v1h-1zM38 6h1v1h-1z
+          M40 0h5v1h-5zM40 1h1v1h-1zM40 2h1v1h-1zM40 3h4v1h-4zM40 4h1v1h-1zM40 5h1v1h-1zM40 6h5v1h-5z
+          M47 0h3v1h-3zM46 1h1v1h-1zM50 1h1v1h-1zM46 2h1v1h-1zM50 2h1v1h-1zM46 3h5v1h-5zM46 4h1v1h-1zM50 4h1v1h-1zM46 5h1v1h-1zM50 5h1v1h-1zM46 6h1v1h-1zM50 6h1v1h-1z
+          M52 0h4v1h-4zM52 1h1v1h-1zM56 1h1v1h-1zM52 2h1v1h-1zM56 2h1v1h-1zM52 3h1v1h-1zM56 3h1v1h-1zM52 4h1v1h-1zM56 4h1v1h-1zM52 5h1v1h-1zM56 5h1v1h-1zM52 6h4v1h-4z
+          M59 0h3v1h-3zM58 1h1v1h-1zM62 1h1v1h-1zM58 2h1v1h-1zM62 2h1v1h-1zM58 3h1v1h-1zM62 3h1v1h-1zM58 4h1v1h-1zM62 4h1v1h-1zM58 5h1v1h-1zM62 5h1v1h-1zM59 6h3v1h-3z
+          M64 0h1v1h-1zM68 0h1v1h-1zM64 1h1v1h-1zM68 1h1v1h-1zM64 2h1v1h-1zM68 2h1v1h-1zM64 3h1v1h-1zM66 3h1v1h-1zM68 3h1v1h-1zM64 4h1v1h-1zM66 4h1v1h-1zM68 4h1v1h-1zM64 5h2v1h-2zM67 5h2v1h-2zM64 6h1v1h-1zM68 6h1v1h-1z
+      "/>
+    </defs>
+    <symbol id="icon-arrow" viewBox="0 0 16 16">
+      <path d="m3 8 5-5 5 5M8 3v10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="title-sprig" viewBox="0 0 38 38">
+      <path fill="#2b5140" d="M31 34h-5v-3h-6v-4h-5v-5h-5v-5H6v-5h6v3h5v4h4v5h5v4h5z"/>
+      <path fill="#33634a" d="M4 5h9v3h4v4h3v7H9v-3H5v-4H2V7h2zm15 14v-8h3V8h8v5h-2v5h-5v3h-4zm-7 2v-3H5v2H2v5h8v-2h4z"/>
+      <path fill="#8aa95c" d="M5 7h6v3h4v3h3v3h-6v-3H8v-3H5zm17 9v-4h5v3h-3v2h-2zM4 21h6v2H4z"/>
+      <path fill="#b7ca76" d="M5 7h4v2H5zm17 5h4v2h-4z"/>
+      <path fill="#ffffdb" d="M28 0h2v2h2v2h-2v2h-2V4h-2V2h2zM35 15h2v2h-2z"/>
+      <path fill="#f2db96" d="M27 20h2v2h-2z"/>
+    </symbol>
+  </svg>
+  <header class="topbar">
+    <h1 class="brand">
+      <svg class="brand-mark" viewBox="0 0 20 20" aria-hidden="true">
+        <path fill="#81a65e" d="M2 13h3v2h4v-4H6V7h2V5h4v3H9v1h3v2h1v6H4v-1H2z"/>
+        <path fill="#d5e495" d="M11 3h6v1h2v5h-2v1h-5V8h-1z"/>
+        <path fill="#263b2e" d="M15 5h2v2h-2z"/>
+      </svg>
+      <span class="sr-only" lang="en">Snake Meadow</span>
+      <svg class="brand-name" viewBox="0 0 69 7" aria-hidden="true">
+        <use href="#title-snake"/>
+        <use href="#title-meadow"/>
+      </svg>
+    </h1>
+    <div class="hud" role="group" aria-label="遊戲資訊">
+      <div class="scores">
+        <div class="stat">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path fill="#6e7f40" d="M8 2h4v2h-2v2H8z"/>
+            <path fill="#ab4937" d="M4 6h3v1h2V6h3v1h2v6h-2v2H9v-1H7v1H4v-2H2V7h2z"/>
+            <path fill="#f49b6e" d="M4 8h2v3H4z"/>
+          </svg>
+          <div><span class="stat-label">分數</span><span class="stat-value" id="score">00</span></div>
+        </div>
+        <div class="stat">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path fill="#927042" d="M3 4h2V2h6v2h2v2h2v3h-2v2h-3v2h2v2H4v-2h2v-2H3V9H1V6h2z"/>
+            <path fill="#e5aa49" d="M5 3h6v6H9v2H7V9H5zM2 6h2v3H3V8H2zm10 0h2v2h-1v1h-1z"/>
+            <path fill="#ffe0a1" d="M6 4h2v3H6z"/>
+          </svg>
+          <div><span class="stat-label">最高分</span><span class="stat-value" id="best">00</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="status" id="status" role="status" data-state="ready">就緒</div>
+    <div class="utilities">
+      <button type="button" class="utility" id="sound" aria-label="音效" aria-pressed="false" title="音效">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M8.5 13.5V5.2L16 3.5v8.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <ellipse cx="6.2" cy="14.2" rx="2.9" ry="2.1"/>
+          <ellipse cx="13.7" cy="12.6" rx="2.9" ry="2.1"/>
+          <path class="sound-off" d="m3 3 14 14" fill="none" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button type="button" class="utility" id="fullscreen" aria-label="全螢幕" aria-pressed="false" title="全螢幕">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path class="expand-icon" d="M2 2h6v2H4v4H2zm10 0h6v6h-2V4h-4zM2 12h2v4h4v2H2zm14 0h2v6h-6v-2h4z"/>
+          <path class="collapse-icon" d="M6 2h2v6H2V6h4zm6 0h2v4h4v2h-6zM2 12h6v6H6v-4H2zm10 0h6v2h-4v4h-2z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="screen">
+    <canvas id="scene" width="320" height="180" aria-label="貪食蛇遊戲畫面" aria-describedby="field-rule instructions">這個遊戲需要支援 Canvas 的瀏覽器。</canvas>
+    <div class="field-title field-intro">
+      <div class="field-wordmark" aria-hidden="true">
+        <svg class="title-ornament title-ornament-left" viewBox="0 0 38 38">
+          <use href="#title-sprig"/>
+        </svg>
+        <svg class="field-word" viewBox="0 0 29 7">
+          <use class="title-shadow" href="#title-snake" x=".45" y="1.0"/>
+          <use class="title-edge" href="#title-snake" y=".52"/>
+          <use class="title-face" href="#title-snake"/>
+        </svg>
+        <svg class="field-word" viewBox="34 0 35 7">
+          <use class="title-shadow" href="#title-meadow" x=".45" y="1.0"/>
+          <use class="title-edge" href="#title-meadow" y=".52"/>
+          <use class="title-face" href="#title-meadow"/>
+        </svg>
+        <svg class="title-ornament title-ornament-right" viewBox="0 0 38 38">
+          <use href="#title-sprig"/>
+        </svg>
+      </div>
+      <p class="field-caption" id="field-rule">吃蘋果變長，穿越邊界，避開自己。</p>
+    </div>
+    <div class="field-title field-end" aria-hidden="true">
+      <p class="field-end-title">遊戲結束</p>
+      <p class="field-caption">撞到自己的身體了</p>
+    </div>
+  </main>
+
+  <footer class="controls">
+    <p id="instructions" class="instructions">
+      <span class="keyboard-hint"><kbd>空白鍵</kbd> 開始或暫停 <span class="hint-divider" aria-hidden="true"></span> 穿越邊界會從對側出現</span>
+      <span class="touch-hint">滑動移動<span aria-hidden="true"> · </span>穿越邊界從對側出現</span>
+    </p>
+    <button type="button" id="start" class="start-button">
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path class="play-icon" d="M5 2.8a.8.8 0 0 0-1.2.7v9a.8.8 0 0 0 1.2.7l7-4.5a.8.8 0 0 0 0-1.4Z"/>
+        <path class="pause-icon" d="M4 3h2.5v10H4zm5.5 0H12v10H9.5z"/>
+      </svg>
+      <span id="start-label">開始遊戲</span>
+    </button>
+    <div class="dpad" role="group" aria-label="移動方向">
+      <button type="button" class="direction" data-dir="left" aria-label="向左"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#icon-arrow"/></svg></button>
+      <button type="button" class="direction" data-dir="up" aria-label="向上"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#icon-arrow"/></svg></button>
+      <button type="button" class="direction" data-dir="down" aria-label="向下"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#icon-arrow"/></svg></button>
+      <button type="button" class="direction" data-dir="right" aria-label="向右"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#icon-arrow"/></svg></button>
+    </div>
+  </footer>
+</body>
+</html>
